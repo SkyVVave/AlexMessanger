@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messanger</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="Main">
+        <h1>Welcome</h1>
+        <div class="MesWind">
+            <div class="mesBoxes" id="mesBoxes">
+                <div class="message1" id="messages">
+                    <h3>Alex</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam eligendi est error enim illo recusandae. Voluptatum, vel, totam assumenda nisi accusamus ut similique dicta et quo, quaerat quibusdam tempore nobis.</p>
+                </div>
+                <div class="message2" id="messages">
+                    <h3>Mira</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam eligendi est error enim illo recusandae. Voluptatum, vel, totam assumenda nisi accusamus ut similique dicta et quo, quaerat quibusdam tempore nobis. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim minus odit sint et? Pariatur cum modi, autem exercitationem rerum eum tenetur quo tempore voluptates asperiores doloribus aliquid debitis, explicabo corrupti.</p>
+                </div>
+            </div>
+            <div class="inpBox">
+                <input type="text" name="inp" id="inp">
+                <button onclick="SendMess()">Send</button>
+
+
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="NameUserEnter">
+        <div class="inputField"><input type="text" name="nameInp" maxlength="8" id="nameImpId"></div>
+    </section>
+
+    <script>
+                    let MessText = document.querySelector("#inp");
+                    let MessUserText = document.querySelector("#nameImpId");
+
+                    
+
+                    function SendMess()
+                    {
+
+
+                        var div = document.createElement(div);
+
+                        var nameUser = document.createElement('h1');
+                        nameUser.textContent = MessUserText.value;
+
+                        var messUser = document.createElement('p');
+                        messUser.textContent = MessText.value;
+
+                        
+                        div.appendChild(nameUser);
+                        div.appendChild(messUser);
+
+                        nameUser.setAttribute('class', 'nameUserChat');
+                        messUser.setAttribute('class', 'messUserChat');
+                        div.setAttribute('id', 'messages');
+
+                        document.getElementById("mesBoxes").appendChild(div);
+                    }
+    </script>
+</body>
+</html>
+

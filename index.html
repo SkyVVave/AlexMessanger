@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messanger</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="Main">
+        <h1>Добро пожаловать</h1>
+        <div class="MesWind">
+            <div class="mesBoxes" id="mesBoxes">
+                
+            </div>
+            <div class="inpBox">
+                <input type="text" name="inp" id="inp">
+                <button onclick="SendMess()">Send</button>
+
+
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="NameUserEnter">
+        <div class="inputField"><input type="text" name="nameInp" maxlength="8" id="nameImpId"></div>
+    </section>
+
+    <script>
+        const socket = new WebSocket('ws://localhost:9000');
+
+        let MessText = document.querySelector("#inp");
+        let MessUserText = document.querySelector("#nameImpId");
+
+        socket.onopen = function() {
+            addMessage('Соединение установлено');
+        };
+        
+        socket.onmessage = function(event) {
+            addMessage('Сервер: ' + event.data);
+        };
+        
+        socket.onclose = function() {
+            addMessage('Соединение закрыто');
+        };
+        
+        socket.onerror = function(error) {
+            addMessage('Ошибка: ' + error.message);
+        };
+
+                    
+
+        function SendMess()
+        {
+
+            const message = MessText.value;
+            const Username = MessUserText.value;
+            if (message) {
+                const msgObj = {
+                    action: 'ECHO',
+                    data: message
+                };
+                socket.send(JSON.stringify(msgObj));
+                addMessage(Username + ': ' + message);
+                MessText.value = '';
+            }
+
+
+            
+        }
+
+        function addMessage(text) {
+            var div = document.createElement(div);
+
+
+
+            var messUser = document.createElement('p');
+            messUser.textContent = text;
+
+                        
+
+            div.appendChild(messUser);
+
+            messUser.setAttribute('class', 'messUserChat');
+            div.setAttribute('id', 'messages');
+
+            document.getElementById("mesBoxes").appendChild(div);
+
+
+
+            
+        }
+
+        MessText.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
+
